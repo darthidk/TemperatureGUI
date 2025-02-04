@@ -4,23 +4,14 @@
 #include "ui_wireinputs.h"
 #include <QDialog>
 #include <string>
-#include <algorithm>
 
 class pinInfo {
 public:
-    QPushButton* btn;
     std::string outputType;
     bool used;
     std::string btnName;
-    
-    std::string saveInfo() {
-        // File Save, "btn1|0|power|"
-        std::string output = btnName + "|" + std::to_string(used) + "|" + outputType + "|";
-        return output;
-    }
-    
-    void initialise(std::string input, QPushButton *in_btn) {
-        btn = in_btn;
+
+    explicit pinInfo(std::string input) {
         int i = 0;
         std::string cur_str;
         int num_param = 0;
@@ -48,13 +39,19 @@ public:
             }
         }
     }
+    
+    std::string saveInfo() {
+        // File Save, "btn1|0|power|"
+        std::string output = btnName + "|" + std::to_string(used) + "|" + outputType + "|";
+        return output;
+    }
 
     std::string displayInfo() {
         std::string out_txt = "Pin: ";
         out_txt.append(btnName);
         out_txt.append("\nUse: ");
         if (used == false) {
-            out_txt = "Not used";
+            out_txt = "Nothing";
         } else {
             out_txt = outputType;
         }
@@ -67,26 +64,13 @@ class wireinputs : public QDialog
     Q_OBJECT
 
 public:
-    //std::vector<pinInfo> analogbtn;
+    QVector<pinInfo> btnInfoVec;
 
     static const int numbtn = 31;
-    // pinInfo analogbtn[numbtn];
-
-
-    // //static const int analogextrasize = 7;
-    // pinInfo* analogextra[7];
-
-    // //static const int digbtnsize = 14;
-    // pinInfo* digbtn[14];
-
-    // //static const int digextrasize = 4;
-    // pinInfo* digextra[4];
-
-    pinInfo* lastButton = nullptr;
 
     explicit wireinputs(QWidget *parent = nullptr);
 
-private slots:
+public slots:
     void show_str();
 
 private:
