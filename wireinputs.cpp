@@ -4,19 +4,16 @@
 #include <iostream>
 
 void wireinputs::show_str() {
-    // QObject* source = QObject::sender();
-    // bool btn_found = false;
-    // for(int i = 0; i < sizeof(analogbtn)/sizeof(analogbtn[0]) && btn_found == false; i++) {
-    //     if (analogbtn[i] == source) {
-    //         this->lastButton = analogbtn[i];
-    //         btn_found = true;
-    //         break;
-    //     }
-    // }
-    //ui->textBrowser->setText(QString::fromStdString(this->lastButton->displayInfo()));
-
-    ui->textBrowser->setText("hello");
-
+    QObject* source = QObject::sender();
+    QString display_str;
+    for(int i = 0; i < btnInfoVec.size(); i++) {
+        if (btnInfoVec.at(i).btn == source) {
+            display_str = btnInfoVec[i].displayInfo();
+            std::cout << "hello";
+            break;
+        }
+    }
+    ui->textBrowser->setText(display_str);
 }
 
 wireinputs::wireinputs(QWidget *parent)
@@ -34,7 +31,8 @@ wireinputs::wireinputs(QWidget *parent)
 
     // On Button Press, change the text of the text browser to the text saved in the pinInfo class for the button
     for(QPushButton* btn : ui->pinbtnwidget->findChildren<QPushButton *>()) {
-        btnInfoVec.push_back(pinInfo("btn1|0|power|"));
+        std::string create_string = btn->text().toStdString() + "|0|power|";
+        btnInfoVec.push_back(pinInfo(create_string, btn));
         connect(btn, &QPushButton::clicked, this, &wireinputs::show_str);
     }
 }

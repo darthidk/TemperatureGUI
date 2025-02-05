@@ -7,12 +7,14 @@
 
 class pinInfo {
 public:
+    QPushButton* btn;
     std::string outputType;
     bool used;
     std::string btnName;
 
-    explicit pinInfo(std::string input) {
-        int i = 0;
+    explicit pinInfo(std::string input, QPushButton* in_btn) {
+        btn = in_btn;
+        int i = -1;
         std::string cur_str;
         int num_param = 0;
         while((unsigned long long)i != input.length()) {
@@ -23,7 +25,13 @@ public:
                     btnName = cur_str;
                     break;
                 case 1:
-                    used = 1;/*std::stoi(cur_str);*/
+                    switch (input.c_str()[0]) {
+                    case 1:
+                        used = false;
+                        break;
+                    default:
+                        used = true;
+                    }
                     break;
                 case 2:
                     outputType = cur_str;
@@ -33,7 +41,6 @@ public:
                 }
                 num_param++;
                 cur_str.clear();
-                i++;
             } else {
                 cur_str += input[i];
             }
@@ -46,14 +53,14 @@ public:
         return output;
     }
 
-    std::string displayInfo() {
-        std::string out_txt = "Pin: ";
+    QString displayInfo() {
+        QString out_txt = "Pin: ";
         out_txt.append(btnName);
         out_txt.append("\nUse: ");
         if (used == false) {
-            out_txt = "Nothing";
+            out_txt += "Nothing";
         } else {
-            out_txt = outputType;
+            out_txt += QString::fromStdString(outputType);
         }
         return out_txt;
     }

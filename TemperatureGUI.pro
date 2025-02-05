@@ -12,19 +12,24 @@ SOURCES += \
     main.cpp \
     savedialog.cpp \
     tempui.cpp \
+    ArduSerial.cpp \
     wireinputs.cpp
 
 HEADERS += \
     savedialog.h \
     tempui.h \
+    ArduSerial.h \
     wireinputs.h
 
 FORMS += \
     savedialog.ui \
     tempui.ui \
-    wireinputs.ui
+    wireinputs.ui\
 
+QMAKE_EXTRA_TARGETS += first copydata
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=

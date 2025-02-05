@@ -253,12 +253,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </widget>
     <widget class="QPushButton" name="gndPButton1">
      <property name="text">
-      <string>GND</string>
+      <string>GND 1</string>
      </property>
     </widget>
     <widget class="QPushButton" name="gndPButton2">
      <property name="text">
-      <string>GND</string>
+      <string>GND 2 </string>
      </property>
     </widget>
     <widget class="QPushButton" name="P5VButton">
@@ -296,7 +296,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
     <widget class="QPushButton" name="gndButton">
      <property name="text">
-      <string>GND</string>
+      <string>GND 3</string>
      </property>
     </widget>
     <widget class="QPushButton" name="arefButton">
