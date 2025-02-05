@@ -73,6 +73,11 @@
    <widget class="QComboBox" name="comboBox">
     <item>
      <property name="text">
+      <string>Unused</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Settings Display Button</string>
      </property>
     </item>
@@ -83,7 +88,17 @@
     </item>
     <item>
      <property name="text">
-      <string>Temperatuer Sensor</string>
+      <string>Temperature Sensor</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>5V</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ground</string>
      </property>
     </item>
     <item>
@@ -258,7 +273,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </widget>
     <widget class="QPushButton" name="gndPButton2">
      <property name="text">
-      <string>GND 2 </string>
+      <string>GND 2</string>
      </property>
     </widget>
     <widget class="QPushButton" name="P5VButton">

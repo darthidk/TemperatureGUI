@@ -26,7 +26,7 @@ public:
                     break;
                 case 1:
                     switch (input.c_str()[0]) {
-                    case 1:
+                    case 0:
                         used = false;
                         break;
                     default:
@@ -73,12 +73,13 @@ class wireinputs : public QDialog
 public:
     QVector<pinInfo> btnInfoVec;
 
-    static const int numbtn = 31;
+    int lastPinIndex;
 
     explicit wireinputs(QWidget *parent = nullptr);
 
 public slots:
     void show_str();
+    void save_to_file();
 
 private:
     Ui::wireinputs *ui;
