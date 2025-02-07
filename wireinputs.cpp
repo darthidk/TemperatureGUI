@@ -1,6 +1,9 @@
 #include "wireinputs.h"
 #include "ui_wireinputs.h"
 #include <fstream>
+#include <iostream>
+#include "ArduSerial.h"
+#include "savedialog.h"
 
 void wireinputs::show_str() {
     QObject* source = QObject::sender();
@@ -31,6 +34,22 @@ void wireinputs::save_to_file() {
     SaveFile.close();
 }
 
+void wireinputs::upload_settings() {
+    WindowsSerial serial_input = WindowsSerial(wireinputs::getCOMport());
+    serial_input.begin(9600, wireinputs::getCOMport());
+
+    if (serial_input.connected()) {
+        SaveDialog *n = new SaveDialog(DialogSetup::UploadSuccess);
+        n->show();
+        n->exec();
+    } else {
+        SaveDialog *n = new SaveDialog(DialogSetup::UploadFail);
+        n->show();
+        n->exec();
+    }
+    serial_input.end();
+}
+
 wireinputs::wireinputs(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::wireinputs)
@@ -39,6 +58,7 @@ wireinputs::wireinputs(QWidget *parent)
 
     ui->scrollArea->setWidget(ui->pinbtnwidget);
     connect(ui->pushButtonSetter, &QPushButton::clicked, this, &wireinputs::save_to_file);
+    connect(ui->uploadButton, &QPushButton::clicked, this, &wireinputs::upload_settings);
 
     // On Button Press, change the text of the text browser to the text saved in the pinInfo class for the button
 

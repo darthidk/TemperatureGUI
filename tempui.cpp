@@ -206,8 +206,13 @@ void tempUI::savecheck() {
 
 void tempUI::openPinScreen() {
     wireinputs *n = new wireinputs;
+    connect(n, SIGNAL(getCOMport()), this, SLOT(getCOMport()));
     n->show();
     n->exec();
+}
+
+int tempUI::getCOMport() {
+    return ui.comPortSpinBox->value();
 }
 
 

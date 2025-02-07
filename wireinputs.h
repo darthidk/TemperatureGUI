@@ -80,6 +80,10 @@ public:
 public slots:
     void show_str();
     void save_to_file();
+    void upload_settings();
+
+signals:
+    int getCOMport();
 
 private:
     Ui::wireinputs *ui;
