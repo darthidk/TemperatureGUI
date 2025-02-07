@@ -22,6 +22,7 @@ private slots:
     bool checkSettingsSaved();
     void savecheck();
     void openPinScreen();
+    int getCOMport();
 
 private:
     Ui::tempUI ui;
