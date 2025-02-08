@@ -39,6 +39,14 @@ void wireinputs::upload_settings() {
     serial_input.begin(9600, wireinputs::getCOMport());
 
     if (serial_input.connected()) {
+        serial_input.print("P");
+        for(int i = 0; i < btnInfoVec.size(); i++) {
+            if (btnInfoVec[i].used == true) {
+                std::string write_str = btnInfoVec[i].saveInfo();
+                serial_input.write(write_str.c_str(), sizeof(write_str));
+            }
+        }
+
         SaveDialog *n = new SaveDialog(DialogSetup::UploadSuccess);
         n->show();
         n->exec();

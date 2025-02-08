@@ -124,6 +124,7 @@ void tempUI::uploadSettings() {
     serial_input.begin(9600, ui.comPortSpinBox->value());
 
     if (serial_input.connected()) {
+        serial_input.print("S");
         std::fstream SaveFile;
         SaveFile.open("settings.txt");
         std::string new_settings;
