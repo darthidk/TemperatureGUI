@@ -4,6 +4,7 @@
 #include "ui_wireinputs.h"
 #include <QDialog>
 #include <string>
+#include <iostream>
 
 class pinInfo {
 public:
@@ -25,12 +26,10 @@ public:
                     btnName = cur_str;
                     break;
                 case 1:
-                    switch (input.c_str()[0]) {
-                    case 0:
-                        used = false;
-                        break;
-                    default:
+                    if (cur_str.at(0) == '1') {
                         used = true;
+                    } else {
+                        used = false;
                     }
                     break;
                 case 2:

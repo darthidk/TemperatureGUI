@@ -43,6 +43,7 @@ void wireinputs::upload_settings() {
         for(int i = 0; i < btnInfoVec.size(); i++) {
             if (btnInfoVec[i].used == true) {
                 std::string write_str = btnInfoVec[i].saveInfo();
+                std::cout << write_str.c_str() << sizeof(write_str.c_str()) << std::endl;
                 serial_input.write(write_str.c_str(), sizeof(write_str));
             }
         }
@@ -68,8 +69,6 @@ wireinputs::wireinputs(QWidget *parent)
     connect(ui->pushButtonSetter, &QPushButton::clicked, this, &wireinputs::save_to_file);
     connect(ui->uploadButton, &QPushButton::clicked, this, &wireinputs::upload_settings);
 
-    // On Button Press, change the text of the text browser to the text saved in the pinInfo class for the button
-
     std::fstream SaveFile;
     SaveFile.open("pininputs.txt");
     for(QPushButton* btn : ui->pinbtnwidget->findChildren<QPushButton *>()) {
@@ -77,6 +76,9 @@ wireinputs::wireinputs(QWidget *parent)
         std::getline(SaveFile, in_str);
         btnInfoVec.push_back(pinInfo(in_str, btn));
         connect(btn, &QPushButton::clicked, this, &wireinputs::show_str);
+        if (btnInfoVec.last().used == true) {
+            btn->setStyleSheet("background-color: green");
+        }
     }
     SaveFile.close();
 }
