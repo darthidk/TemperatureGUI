@@ -4,7 +4,17 @@
 #include "ui_wireinputs.h"
 #include <QDialog>
 #include <string>
-#include <iostream>
+#include <vector>
+
+const std::vector<std::string> serialmap = {
+    "Temperature Sensor",
+    "Settings Display Button",
+    "LED On/Off Button",
+    "LED Red",
+    "LED Green",
+    "LED Blue"
+};
+
 
 class pinInfo {
 public:
@@ -61,7 +71,13 @@ public:
     }
 
     std::string sendInfo() {
-        std::string output = btnName + "|" + outputType + "|";
+        unsigned long long i = 0;
+        for(i = 0; i < serialmap.size(); i++) {
+            if (outputType == serialmap[i]) {
+                break;
+            }
+        }
+        std::string output = btnName + "|" + std::to_string(i) + "|";
         return output;
     }
 

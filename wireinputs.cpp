@@ -37,6 +37,7 @@ void wireinputs::save_to_file() {
     btnInfoVec[lastPinIndex].send_to_arduino = ui->checkBox->isChecked();
     if (btnInfoVec[lastPinIndex].outputType == "Unused") {
         btnInfoVec[lastPinIndex].used = false;
+        btnInfoVec[lastPinIndex].send_to_arduino = false;
     }
     for(int i = 0; i < btnInfoVec.size(); i++) {
         SaveFile << btnInfoVec[i].saveInfo() << "\n";
@@ -53,8 +54,8 @@ void wireinputs::upload_settings() {
         for(int i = 0; i < btnInfoVec.size(); i++) {
             if (btnInfoVec[i].send_to_arduino == true) {
                 std::string write_str = btnInfoVec[i].sendInfo();
-                std::cout << write_str.c_str() << sizeof(write_str.c_str()) << std::endl;
-                serial_input.write(write_str.c_str(), sizeof(write_str));
+                std::cout << write_str.c_str();
+                serial_input.write(write_str.c_str(), write_str.size());
             }
         }
         SaveDialog *n = new SaveDialog(DialogSetup::UploadSuccess);
