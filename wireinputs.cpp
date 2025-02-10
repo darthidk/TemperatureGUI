@@ -6,12 +6,21 @@
 #include "savedialog.h"
 
 void wireinputs::show_str() {
+    if (btnInfoVec[lastPinIndex].send_to_arduino == true) {
+        btnInfoVec[lastPinIndex].btn->setStyleSheet("background-color: green");
+    } else if (btnInfoVec[lastPinIndex].used == true) {
+        btnInfoVec[lastPinIndex].btn->setStyleSheet("background-color: orange");
+    } else {
+        btnInfoVec[lastPinIndex].btn->setStyleSheet("background-color: ");
+    }
     QObject* source = QObject::sender();
     QString display_str;
     for(int i = 0; i < btnInfoVec.size(); i++) {
         if (btnInfoVec.at(i).btn == source) {
             display_str = btnInfoVec[i].displayInfo();
+            ui->checkBox->setChecked(btnInfoVec[i].send_to_arduino);
             lastPinIndex = i;
+            btnInfoVec[i].btn->setStyleSheet("background-color: red");
             break;
         }
     }
@@ -25,6 +34,7 @@ void wireinputs::save_to_file() {
     btnInfoVec[lastPinIndex].outputType = ui->comboBox->currentText().toStdString();
     btnInfoVec[lastPinIndex].used = true;
     btnInfoVec[lastPinIndex].btn->click();
+    btnInfoVec[lastPinIndex].send_to_arduino = ui->checkBox->isChecked();
     if (btnInfoVec[lastPinIndex].outputType == "Unused") {
         btnInfoVec[lastPinIndex].used = false;
     }
@@ -47,7 +57,6 @@ void wireinputs::upload_settings() {
                 serial_input.write(write_str.c_str(), sizeof(write_str));
             }
         }
-
         SaveDialog *n = new SaveDialog(DialogSetup::UploadSuccess);
         n->show();
         n->exec();
@@ -59,6 +68,10 @@ void wireinputs::upload_settings() {
     serial_input.end();
 }
 
+void wireinputs::update_send_setting() {
+    btnInfoVec[lastPinIndex].send_to_arduino = ui->checkBox->isChecked();
+}
+
 wireinputs::wireinputs(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::wireinputs)
@@ -68,6 +81,7 @@ wireinputs::wireinputs(QWidget *parent)
     ui->scrollArea->setWidget(ui->pinbtnwidget);
     connect(ui->pushButtonSetter, &QPushButton::clicked, this, &wireinputs::save_to_file);
     connect(ui->uploadButton, &QPushButton::clicked, this, &wireinputs::upload_settings);
+    connect(ui->checkBox, &QCheckBox::clicked, this, &wireinputs::update_send_setting);
 
     std::fstream SaveFile;
     SaveFile.open("pininputs.txt");
@@ -76,8 +90,10 @@ wireinputs::wireinputs(QWidget *parent)
         std::getline(SaveFile, in_str);
         btnInfoVec.push_back(pinInfo(in_str, btn));
         connect(btn, &QPushButton::clicked, this, &wireinputs::show_str);
-        if (btnInfoVec.last().used == true) {
+        if (btnInfoVec.last().send_to_arduino == true) {
             btn->setStyleSheet("background-color: green");
+        } else if (btnInfoVec.last().used == true) {
+            btn->setStyleSheet("background-color: orange");
         }
     }
     SaveFile.close();

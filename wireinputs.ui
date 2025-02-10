@@ -64,116 +64,11 @@
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter_5">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>10</y>
-     <width>191</width>
-     <height>48</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Vertical</enum>
-   </property>
-   <widget class="QComboBox" name="comboBox">
-    <item>
-     <property name="text">
-      <string>Unused</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Settings Display Button</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LED On/Off Button</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Temperature Sensor</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>5V</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ground</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LED Red</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LED Green</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LED Blue</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD RS (Pin 4)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD R/W (Pin 5)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD E (Pin 6)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD DB4 (Pin 11)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD DB5 (Pin 12)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD DB6 (Pin 13)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD DB7 (Pin 14)</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>LCD LED+ (Pin 15)</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QPushButton" name="pushButtonSetter">
-    <property name="text">
-     <string>Set Pin Input</string>
-    </property>
-   </widget>
-  </widget>
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>90</y>
+     <y>110</y>
      <width>191</width>
      <height>51</height>
     </rect>
@@ -432,6 +327,121 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="text">
     <string>Upload</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>10</y>
+     <width>191</width>
+     <height>84</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>Unused</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Settings Display Button</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LED On/Off Button</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Temperature Sensor</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>5V</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ground</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LED Red</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LED Green</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LED Blue</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD RS (Pin 4)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD R/W (Pin 5)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD E (Pin 6)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD DB4 (Pin 11)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD DB5 (Pin 12)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD DB6 (Pin 13)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD DB7 (Pin 14)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LCD LED+ (Pin 15)</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="pushButtonSetter">
+      <property name="text">
+       <string>Save Pin Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCheckBox" name="checkBox">
+      <property name="text">
+       <string>Send Pin Setting to Arduino</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
