@@ -51,8 +51,8 @@ void wireinputs::upload_settings() {
     if (serial_input.connected()) {
         serial_input.print("P");
         for(int i = 0; i < btnInfoVec.size(); i++) {
-            if (btnInfoVec[i].used == true) {
-                std::string write_str = btnInfoVec[i].saveInfo();
+            if (btnInfoVec[i].send_to_arduino == true) {
+                std::string write_str = btnInfoVec[i].sendInfo();
                 std::cout << write_str.c_str() << sizeof(write_str.c_str()) << std::endl;
                 serial_input.write(write_str.c_str(), sizeof(write_str));
             }

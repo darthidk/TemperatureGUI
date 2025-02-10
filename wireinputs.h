@@ -60,6 +60,11 @@ public:
         return output;
     }
 
+    std::string sendInfo() {
+        std::string output = btnName + "|" + outputType + "|";
+        return output;
+    }
+
     QString displayInfo() {
         QString out_txt = "Pin: ";
         out_txt.append(btnName);
