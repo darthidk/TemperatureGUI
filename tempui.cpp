@@ -77,6 +77,7 @@ tempUI::tempUI(QWidget *parent)
         case 'P':
             ui.checkLEDBox->setChecked((int)(input[2] - '0'));
             ui.checkLockBox->setChecked((int)(input[4] - '0'));
+            ui.checkPinBox->setChecked((int)(input[6] - '0'));
             break;
         }
     }
@@ -105,7 +106,8 @@ void tempUI::saveSettings() {
     SaveFile << "H|" << ui.spinBox_5->value() << "|" << ui.spinBox_6->value() << "|\n";
     ui.saveProgressBar->setValue(progress_delay * 4);
     SaveFile << "P|" << ui.checkLEDBox->isChecked() << "|"
-             << ui.checkLockBox->isChecked() << "|\n;";
+             << ui.checkLockBox->isChecked() << "|"
+             << ui.checkPinBox->isChecked() << "|\n;";
     ui.saveProgressBar->setValue(progress_delay * 5);
     SaveFile.close();
     ui.saveProgressBar->setValue(100);
@@ -155,6 +157,7 @@ void tempUI::setDefaultSettings() {
     ui.spinBox_6->setValue(33);
     ui.checkLEDBox->setChecked(true);
     ui.checkLockBox->setChecked(false);
+    ui.checkPinBox->setChecked(true);
     this->saveSettings();
 }
 
@@ -185,6 +188,9 @@ bool tempUI::checkSettingsSaved() {
                 saved = false;
             }
             if (ui.checkLockBox->isChecked() != (int)(input[4] - '0')) {
+                saved = false;
+            }
+            if (ui.checkLockBox->isChecked() != (int)(input[6] - '0')) {
                 saved = false;
             }
             break;
