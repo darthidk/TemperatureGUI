@@ -23,6 +23,9 @@ private slots:
     void savecheck();
     void openPinScreen();
     int getCOMport();
+    bool comConnected();
+    void displayCOMconnected();
+    void resetCOMCheckBox();
 
 private:
     Ui::tempUI ui;

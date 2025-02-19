@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>589</width>
-    <height>220</height>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -122,6 +122,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </item>
      <item>
       <widget class="QPushButton" name="A3Button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>A3</string>
        </property>
@@ -328,7 +334,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <string>Upload</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>390</x>

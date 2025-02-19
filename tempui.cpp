@@ -3,6 +3,7 @@
 #include "wireinputs.h"
 #include "ArduSerial.cpp"
 #include <fstream>
+#include <iostream>
 #include <string>
 
 void readSetupTempSpinBox(QSpinBox* spin1, QSpinBox* spin2, std::string in_str) {
@@ -53,6 +54,8 @@ tempUI::tempUI(QWidget *parent)
     connect(ui.pushDefaultButton, &QPushButton::clicked, this, &tempUI::setDefaultSettings);
     connect(ui.pushButton, &QPushButton::clicked, this, &tempUI::savecheck);
     connect(ui.pushPinButton,&QPushButton::clicked, this, &tempUI::openPinScreen);
+    connect(ui.pushRescan, &QPushButton::clicked, this, &tempUI::displayCOMconnected);
+    connect(ui.comConnectedCheckBox, &QCheckBox::clicked, this, &tempUI::resetCOMCheckBox);
 
     std::ifstream settingsfile;
     settingsfile.open("settings.txt");
@@ -222,4 +225,22 @@ int tempUI::getCOMport() {
     return ui.comPortSpinBox->value();
 }
 
+bool tempUI::comConnected() {
+    WindowsSerial serial_input = WindowsSerial(ui.comPortSpinBox->value());
+    serial_input.begin(9600, ui.comPortSpinBox->value());
+    bool result = serial_input.connected();
+    serial_input.end();
+    std::cout << result;
+    return result;
+}
+
+void tempUI::displayCOMconnected() {
+    // WindowsSerial serial_input = WindowsSerial(ui.comPortSpinBox->value());
+    // ui.comConnectedCheckBox->setChecked(serial_input.connected());
+    ui.comConnectedCheckBox->setChecked(tempUI::comConnected());
+}
+
+void tempUI::resetCOMCheckBox() {
+    ui.comConnectedCheckBox->setChecked(!ui.comConnectedCheckBox->isChecked());
+}
 

@@ -20,7 +20,14 @@ void wireinputs::show_str() {
             display_str = btnInfoVec[i].displayInfo();
             ui->checkBox->setChecked(btnInfoVec[i].send_to_arduino);
             lastPinIndex = i;
-            btnInfoVec[i].btn->setStyleSheet("background-color: red");
+            btnInfoVec[i].btn->setFixedSize(btnInfoVec[i].btn->size());
+            if (btnInfoVec[lastPinIndex].send_to_arduino == true) {
+                btnInfoVec[lastPinIndex].btn->setStyleSheet("background-color: green; border: 2px solid red");
+            } else if (btnInfoVec[lastPinIndex].used == true) {
+                btnInfoVec[lastPinIndex].btn->setStyleSheet("background-color: orange; border: 2px solid red");
+            } else {
+                btnInfoVec[lastPinIndex].btn->setStyleSheet("border: 2px solid red; background-color: ");
+            }
             break;
         }
     }
@@ -38,6 +45,21 @@ void wireinputs::save_to_file() {
     if (btnInfoVec[lastPinIndex].outputType == "Unused") {
         btnInfoVec[lastPinIndex].used = false;
         btnInfoVec[lastPinIndex].send_to_arduino = false;
+    } else {
+        for(int i = 0; i < btnInfoVec.size(); i++) {
+            if (btnInfoVec[i].outputType == btnInfoVec[lastPinIndex].outputType && i != lastPinIndex) {
+                btnInfoVec[i].outputType = "Unused";
+                btnInfoVec[i].used = false;
+                btnInfoVec[i].send_to_arduino = false;
+                if (btnInfoVec[i].send_to_arduino == true) {
+                    btnInfoVec[i].btn->setStyleSheet("background-color: green");
+                } else if (btnInfoVec[i].used == true) {
+                    btnInfoVec[i].btn->setStyleSheet("background-color: orange");
+                } else {
+                    btnInfoVec[i].btn->setStyleSheet("background-color: ");
+                }
+            }
+        }
     }
     for(int i = 0; i < btnInfoVec.size(); i++) {
         SaveFile << btnInfoVec[i].saveInfo() << "\n";
